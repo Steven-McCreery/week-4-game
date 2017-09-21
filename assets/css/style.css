@@ -1,0 +1,29 @@
+h1 {
+	text-align: center;
+}
+
+.fighter {
+	float: left;
+	margin: 3%;
+	text-align: center;
+}
+
+.health{
+	text-align: center;
+
+}
+
+.attacker{
+	clear: both;
+	text-align: center;
+}
+
+.defender{
+	clear: both;
+	text-align: center;
+}
+
+.defeated{
+	clear: both;
+	text-align: center;
+}
