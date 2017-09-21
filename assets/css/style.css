@@ -2,23 +2,19 @@ h1 {
 	text-align: center;
 }
 
+/*giving some spacing around the images*/
 .fighter {
 	float: left;
 	margin: 3%;
 	text-align: center;
 }
 
-.health{
-	text-align: center;
-
-}
-
-.attacker{
+.battle{
 	clear: both;
 	text-align: center;
 }
 
-.defender{
+.defenders{
 	clear: both;
 	text-align: center;
 }
@@ -27,3 +23,47 @@ h1 {
 	clear: both;
 	text-align: center;
 }
+
+.health{
+	text-align: center;
+}
+
+.inactive{
+	color: gray;
+	background: white;
+	font-size: 30px;
+}
+
+.active{
+	color: black;
+	background: red;
+	font-size: 50px;
+}
+
+.main{
+	float: left;
+	margin: 3%;
+}
+
+.other{
+	float: left;
+	margin: 3%;
+	text-align: center;
+}
+
+.enemy{
+	float: right;
+	margin: 3%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
