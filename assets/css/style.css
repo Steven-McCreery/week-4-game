@@ -1,8 +1,22 @@
-h1 {
-	text-align: center;
+body {
+	background-image: url("../images/background.jpg");
+	background-size: 100%;
+}
+
+.text{
+	background-color: darkgray;
+	font-size: 20px;
+	margin: 3px;
+}
+
+.header {
 	font-size: 40px;
 	font-weight: bold;
 	text-decoration: underline;
+}
+
+h1 {
+	text-align: center;
 }
 
 /*giving some spacing around the images*/
@@ -76,33 +90,32 @@ h1 {
 }
 
 #fighter1{
-	background-color: red;
+	background-color: darkred;
 	font-size: 20px;
 	color: white;
-	padding: 0px 20px;
+	padding: 2px 25px;
 }
 
 #fighter2{
-	background-color: blue;
+	background-color: #81a6c2;
 	font-size: 20px;
 	color: white;
-	padding: 0px 20px;
+	padding: 2px 25px;
 }
 
 #fighter3{
 	background-color: black;
 	font-size: 20px;
 	color: white;
-	padding: 0px 20px;
+	padding: 2px 25px;
 }
 
 #fighter4{
 	background-color: green;
 	font-size: 20px;
 	color: white;
-	padding: 0px 20px;
+	padding: 2px 25px;
 }
-
 
 
 

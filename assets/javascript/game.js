@@ -129,8 +129,6 @@ battle = function() {
 		//checking for main character's health for losing condition
 		if (mainHealth < 1) {
 			fighter = false;
-			$(".main").addClass("gone");
-			$(".main").removeClass("main");
 
 			//inactivating battle button on loss
 			$(".begin").removeClass("active");
@@ -139,6 +137,8 @@ battle = function() {
 			//alert of loss
 			setTimeout(function(){
 			alert("You have been bested by your enemies!  Reaload the page to retry.");
+			// $(".main").addClass("gone");
+			// $(".main").removeClass("main");
 			},1000 * .2)
 			return;
 		}
@@ -150,7 +150,7 @@ battle = function() {
 				$(".enemy").addClass("rip");
 				$(".enemy").removeClass("enemy");
 				$(".rip").addClass("gone");
-				$(".defeated").append("Tango Down!<br>")
+				$(".defeated").append("<span class='text'>TANGO DOWN!</span><br>")
 				//changing statuses now that enemy is defeated
 				isEnemy = false;
 			},1000 * .2) 
@@ -175,6 +175,7 @@ battle = function() {
 				},1000 * .2)
 				setTimeout(function(){
 					$(".main").addClass("winner");
+					$(".winner").html("<img src='assets/images/chicken.jpg'>")
 				},1000 * .2)
 			}
 		}
