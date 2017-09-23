@@ -1,5 +1,8 @@
 h1 {
 	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 /*giving some spacing around the images*/
@@ -72,7 +75,33 @@ h1 {
 	margin: 3% 20%;
 }
 
+#fighter1{
+	background-color: red;
+	font-size: 20px;
+	color: white;
+	padding: 0px 20px;
+}
 
+#fighter2{
+	background-color: blue;
+	font-size: 20px;
+	color: white;
+	padding: 0px 20px;
+}
+
+#fighter3{
+	background-color: black;
+	font-size: 20px;
+	color: white;
+	padding: 0px 20px;
+}
+
+#fighter4{
+	background-color: green;
+	font-size: 20px;
+	color: white;
+	padding: 0px 20px;
+}
 
 
 
