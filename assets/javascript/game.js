@@ -2,10 +2,7 @@
 //ready when loading is complete
 $(document).ready(function() {
 	$(".fighter").on("click", fighterSelect);
-		// $(document).on("click", "other", enemySelect);
-	// $("button:not(.fighter)").on("click", enemySelect);
 	$(".begin").on("click", battle);
-
 })
 
 //defining initial variables
@@ -21,30 +18,27 @@ var battle;
 
 var wins;
 
-// var clicks = 0;
-
-//object constructor for characters
-function Character(powerIncrement, power, defense, health) {
+//object function for characters
+function Character(power, defense, health) {
 	return{
-		"powerIncrement":powerIncrement,
 		"power":power,
 		"defense":defense,
 		"health":health,
 		}
 	}
 	
-
 //creating 4 new objects with above template
-var character1 = Character(111, 111, 111, 111);
+var character1 = Character(111, 111, 111);
 
-var character2 = Character(222, 222, 222, 222);
+var character2 = Character(222, 222, 222);
 
-var character3 = Character(333, 333, 333, 333);
+var character3 = Character(333, 333, 333);
 
-var character4 = Character(444, 444, 444, 444);
+var character4 = Character(444, 444, 444);
 
 console.log(character1);
 
+//adding the newly created objects to the html elements
 var fighter2Character = {
 	"fighter1":character1,
 	"fighter2":character2,
@@ -57,67 +51,25 @@ var enemy;
 clicks = 1;
 
 console.log(main);
-
-//adding the newly created objects to the html elements
-
-
-//trying to make object move in as a challenger to first selected with a click tracker
-// fighterSelect = function() {
-// 	clicks = 0;
-
-	// if (clicks == 0){
-	// 	if (fighter == false) {
-	// 	$($(this)).appendTo(".battle");
-	// 	fighter = true;
-	// 	$($(this)).removeClass("fighter");
-	// 	$($(this)).addClass("main");
-	// 	$($(this)).data("currentAttacker", true);
-	// 	$($(this)).data("available", false);
-	// 	$(".fighter").addClass("other");
-	// 	$(".fighter").removeClass("fighter");
-	// 	$(".other").appendTo(".defenders");
-	// 		clicks = 1;
-	// 	}
-	// }
-// 	else {
-// 		if (enemy == true) {
-// 			setTimeout(function(){
-// 			alert("You have already selected a defender, you must first battle!");
-// 			},1000 * .2)
-// 		}
-
-	// if (enemy == false) {
-	// 	$($(this)).appendTo(".battle");
-	// 	enemy = true;
-	// 	$($(this)).removeClass("other");
-	// 	$($(this)).removeClass("fighter");
-	// 	$($(this)).addClass("enemy");
-	// 	$($(this)).data("available", false);
-	// 	$($(this)).data("currentDefender", true);
-	// 	$(".begin").removeClass(".inactive");
-	// 	$(".begin").addClass(".active");
-	// 	console.log("enemy selected");
-// 		}
-// 	}
-
-// }
-
+console.log(enemy);
 
 //selection method for first character
 fighterSelect = function() {
 
 	//when no fighter is present this will move one (clicked) item into the battle (main) position and the three remaining into defenders position, adjusting classes and object property values
-	if (fighter == false) {
-		$($(this)).appendTo(".battle");
-		fighter = true;
-		$($(this)).removeClass("fighter");
-		$($(this)).addClass("main");
-		$(".fighter").addClass("other");
-		$(".fighter").removeClass("fighter");
-		$(".other").appendTo(".defenders");
-		$(".other").on("click", enemySelect);
-		wins = 0;
-		main = fighter2Character[$(".main").attr('id')];
+	if (clicks === 1) {
+		if (fighter == false) {
+			$($(this)).appendTo(".battle");
+			fighter = true;
+			$($(this)).removeClass("fighter");
+			$($(this)).addClass("main");
+			$(".fighter").addClass("other");
+			$(".fighter").removeClass("fighter");
+			$(".other").appendTo(".defenders");
+			wins = 0;
+			main = fighter2Character[$(".main").attr('id')];
+			$(".other").on("click", enemySelect);
+		}
 	}
 }
 
@@ -136,7 +88,6 @@ enemySelect = function() {
 		$($(this)).appendTo(".battle");
 		isEnemy = true;
 		$($(this)).removeClass("other");
-		$($(this)).removeClass("fighter");
 		$($(this)).addClass("enemy");
 		$(".begin").removeClass("inactive");
 		$(".begin").addClass("active");
@@ -145,13 +96,12 @@ enemySelect = function() {
 	}
 }
 
-
-
 //combat mechanic on button click when an attacker and defender are present
 battle = function() {
 	if (fighter === true && isEnemy === true) {
-		// var main = fighter2Character[$(".main").attr('id')];
-		// var enemy = fighter2Character[$(".enemy").attr('id')];
+		if (fighter === false) {
+			return;
+		}
 		console.log(main);
 		console.log(enemy);
 		mainHealth = main.health;
@@ -165,15 +115,14 @@ battle = function() {
 		$(".enemy .health").html(enemyHealth);
 		console.log(enemyHealth);
 
+		//reducing main character's health by enemy defense
+		mainHealth = mainHealth - enemyDefense;
+		main.health = mainHealth;
+		$(".main .health").html(mainHealth);
+
 		//main charater's power increases
-		// $(main).data("power", $(main).data("power") + $(main).data("powerIncrement"));
-		// $(".main .power").html($(".main").data("power"));
 		clicks = clicks + 1;
 		console.log(clicks);
-
-		//reducing main character's health by enemy defense
-		$(main).data("health", (parseInt(mainHealth) - parseInt(enemyDefense)));
-		$(".main .health").html(mainHealth);
 
 		//defeated enemy conditions
 		if (enemyHealth < 1) {
@@ -212,18 +161,23 @@ battle = function() {
 		}
 
 		//checking for main character's health for losing condition
-		if ($(".main").data("health") < 1) {
-			setTimeout(function(){
-			alert("You have been bested by your enemies!  Reaload the page to retry.");
-			},1000 * .2)
+		if (mainHealth < 1) {
+			fighter = false;
+			$(".main").addClass("gone");
+			$(".main").removeClass("main");
 
 			//inactivating battle button on loss
 			$(".begin").removeClass("active");
 			$(".begin").addClass("inactive");
+
+			//alert of loss
+			setTimeout(function(){
+			alert("You have been bested by your enemies!  Reaload the page to retry.");
+			},1000 * .2)
+
 		}
 	}	
 }
 
 
 
-//function Character(powerIncrement, power, defense, health, available, currentAttacker, currentDefender)
