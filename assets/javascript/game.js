@@ -54,6 +54,7 @@ var fighter2Character = {
 
 var main;
 var enemy;
+clicks = 1;
 
 console.log(main);
 
@@ -117,7 +118,6 @@ fighterSelect = function() {
 		$(".other").on("click", enemySelect);
 		wins = 0;
 		main = fighter2Character[$(".main").attr('id')];
-		// window.main = main;
 	}
 }
 
@@ -142,7 +142,6 @@ enemySelect = function() {
 		$(".begin").addClass("active");
 		console.log("enemy selected");
 		enemy = fighter2Character[$(".enemy").attr('id')];
-		// window.enemy = enemy;
 	}
 }
 
@@ -156,24 +155,21 @@ battle = function() {
 		console.log(main);
 		console.log(enemy);
 		mainHealth = main.health;
-		var mainCurrentHealth = mainHealth;
-		mainInc = main.power;
-		mainPower = mainInc;
+		mainPower = main.power;
 		enemyHealth = enemy.health;
-		var enemyCurrentHealth = enemyHealth;
 		enemyDefense = enemy.defense;
 
 		//enemy's health less the main character's attack value
-		enemyHealth = enemyHealth - mainPower;
+		enemyHealth = enemyHealth - (mainPower * clicks);
 		enemy.health = enemyHealth;
-		// $(enemy).data("health", enemyHealth);
-		// window.enemyHealth = enemyHealth;
-		$(".enemy .health").html(" " + enemyHealth);
+		$(".enemy .health").html(enemyHealth);
 		console.log(enemyHealth);
 
 		//main charater's power increases
-		$(main).data("power", $(main).data("power") + $(main).data("powerIncrement"));
+		// $(main).data("power", $(main).data("power") + $(main).data("powerIncrement"));
 		// $(".main .power").html($(".main").data("power"));
+		clicks = clicks + 1;
+		console.log(clicks);
 
 		//reducing main character's health by enemy defense
 		$(main).data("health", (parseInt(mainHealth) - parseInt(enemyDefense)));
@@ -186,7 +182,7 @@ battle = function() {
 				$(".enemy").addClass("rip");
 				$(".enemy").removeClass("enemy");
 				$(".rip").addClass("gone");
-				$(".defeated").append("Defeated an Enemy!<br>")
+				$(".defeated").append("Tango Down!<br>")
 				//changing statuses now that enemy is defeated
 				isEnemy = false;
 			},1000 * .2) 
@@ -208,6 +204,9 @@ battle = function() {
 			if (wins > 2) {
 				setTimeout(function(){
 					alert("You have defeated all the challengers!  Well done!");
+				},1000 * .2)
+				setTimeout(function(){
+					$(".main").addClass("winner");
 				},1000 * .2)
 			}
 		}

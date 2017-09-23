@@ -67,7 +67,10 @@ h1 {
 	display: none;
 }
 
-
+.winner{
+	float:none;
+	margin: 3% 20%;
+}
 
 
 
