@@ -28,13 +28,13 @@ function Character(power, defense, health) {
 	}
 	
 //creating 4 new objects with above template
-var character1 = Character(111, 111, 111);
+var character1 = Character(65, 29, 100);
 
-var character2 = Character(222, 222, 222);
+var character2 = Character(40, 30, 125);
 
-var character3 = Character(333, 333, 333);
+var character3 = Character(30, 25, 150);
 
-var character4 = Character(444, 444, 444);
+var character4 = Character(20, 20, 190);
 
 console.log(character1);
 
@@ -47,7 +47,9 @@ var fighter2Character = {
 	}
 
 var main;
+
 var enemy;
+
 clicks = 1;
 
 console.log(main);
@@ -124,6 +126,23 @@ battle = function() {
 		clicks = clicks + 1;
 		console.log(clicks);
 
+		//checking for main character's health for losing condition
+		if (mainHealth < 1) {
+			fighter = false;
+			$(".main").addClass("gone");
+			$(".main").removeClass("main");
+
+			//inactivating battle button on loss
+			$(".begin").removeClass("active");
+			$(".begin").addClass("inactive");
+
+			//alert of loss
+			setTimeout(function(){
+			alert("You have been bested by your enemies!  Reaload the page to retry.");
+			},1000 * .2)
+			return;
+		}
+
 		//defeated enemy conditions
 		if (enemyHealth < 1) {
 			setTimeout(function() {
@@ -160,22 +179,6 @@ battle = function() {
 			}
 		}
 
-		//checking for main character's health for losing condition
-		if (mainHealth < 1) {
-			fighter = false;
-			$(".main").addClass("gone");
-			$(".main").removeClass("main");
-
-			//inactivating battle button on loss
-			$(".begin").removeClass("active");
-			$(".begin").addClass("inactive");
-
-			//alert of loss
-			setTimeout(function(){
-			alert("You have been bested by your enemies!  Reaload the page to retry.");
-			},1000 * .2)
-
-		}
 	}	
 }
 
